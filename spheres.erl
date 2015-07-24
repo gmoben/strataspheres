@@ -15,7 +15,7 @@ createBag(NBlack, NWhite) ->
   Bag = lists:flatmap(fun({X, N}) -> lists:duplicate(N, X) end, [{b, NBlack}, {w, NWhite}]),
   shuffle(Bag).
 
-%% Draw 2 elements from a bag and return the last remaining element.
+%% Draw 2 elements recursively from a bag and return the last remaining element.
 recursiveDraw(Bag) ->
   Len = length(Bag),
   if Len > 1 ->
@@ -67,7 +67,7 @@ run(PreviousResults, RemainingIterations) ->
     true -> printError('Invalid iteration count', RemainingIterations)
   end.
 
-%% Print the results of a simulation.
+%% Print the percent likelihood of each ball type being the remaining ball.
 printResults(Results, Iterations) ->
   BCount = count(b, Results),
   WCount = count(w, Results),
@@ -77,9 +77,9 @@ printResults(Results, Iterations) ->
   io:format(WResult).
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Convience Functions %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Convenience Functions %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Print an error with an optional extra argument.
 printError(Name, X) ->
